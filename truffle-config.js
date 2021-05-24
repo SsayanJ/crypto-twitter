@@ -1,3 +1,16 @@
+require("dotenv").config();
+const HDWalletProvider = require("@truffle/hdwallet-provider")
+
+// Please set your mnemonic and ropsten_infura_apikey variables in a .env file
+
+// 12 mnemonic words that represents the account that will own the contract (got in Metamask)
+const ropsten_mnemonic = process.env.ropsten_mnemonic;
+const main_mnemonic = process.env.main_mnemonic;
+
+// Infura API key (project ID)
+const ropsten_infura_apikey = process.env.ropsten_infura_apikey;
+const main_infura_apikey = process.env.main_infura_apikey;
+
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -36,6 +49,37 @@ module.exports = {
    */
 
   networks: {
+    development: {
+			host: process.env.host || "localhost",
+			port: 8545,
+			network_id: "*", // Match any network id,
+			gas: 6721975,
+		},
+		ropsten: {
+			provider: () =>
+				new HDWalletProvider(
+					ropsten_mnemonic,
+					"https://ropsten.infura.io/v3/" + ropsten_infura_apikey
+				),
+			network_id: "3",
+			gas: 8000000,
+		},
+		mainnet: {
+			provider: () =>
+				new HDWalletProvider(
+					main_mnemonic,
+					"https://mainnet.infura.io/v3/" + main_infura_apikey
+				),
+			network_id: "1",
+			gas: 8000000,
+		},
+		coverage: {
+			host: process.env.host || "localhost",
+			network_id: "*",
+			port: 8555, // <-- If you change this, also set the port option in .solcover.js.
+			gas: 0xfffffffffff, // <-- Use this high gas value
+			gasPrice: 0x01, // <-- Use this low gas price
+		},
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
@@ -82,7 +126,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      // version: "0.5.1",    // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.4",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -102,5 +146,6 @@ module.exports = {
 
   db: {
     enabled: false
-  }
+  },
+  plugins: ["solidity-coverage"],
 };
