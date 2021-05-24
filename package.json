@@ -1,0 +1,33 @@
+{
+  "name": "cryptotwitter",
+  "version": "1.0.0",
+  "description": "Twitter clone on Ethereum",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SsayanJ/crypto-twitter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SsayanJ/crypto-twitter/issues"
+  },
+  "homepage": "https://github.com/SsayanJ/crypto-twitter#readme",
+  "devDependencies": {
+    "@openzeppelin/test-helpers": "^0.5.11",
+    "chai": "^4.3.4",
+    "eslint": "^7.27.0",
+    "prettier": "2.3.0",
+    "solidity-coverage": "^0.7.16"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "@truffle/hdwallet-provider": "^1.4.0",
+    "dotenv": "^10.0.0",
+    "solc": "^0.8.4",
+    "solidity-docgen": "^0.5.13"
+  }
+}
