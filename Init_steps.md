@@ -21,6 +21,7 @@ prettier - helps with formatting : ```npm install --save-dev --save-exact pretti
 solidity-coverage - test coverage : ```npm install --save-dev solidity-coverage```  
 ESLint - Linter : ```npm install eslint --save-dev```
 @openzeppelin/contracts : ```npm install @openzeppelin/contracts```
+truffle-assertions - used for tests : ```npm install --save-dev truffle-assertions``` 
 
 # Linters config files  
 Create **.eslintrc** file:
