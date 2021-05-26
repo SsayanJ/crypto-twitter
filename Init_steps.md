@@ -155,3 +155,29 @@ Configure connection to networks:
 			gasPrice: 0x01, // <-- Use this low gas price
 		},
 ```
+
+# Writing the contract
+Create a new **\*.sol** file in *contracts* folder to write your contract in.  
+Any contract need the following code to start with a code similar to the below. A license (not mandatoty but recommended), the version of solidity used for that contract, any import needed and the contract name.
+```js
+// "SPDX-License-Identifier: MIT"
+
+pragma solidity >=0.8.0 <0.9.0;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract TwitterClone {
+
+}
+```
+
+# Running tests on the contracts
+## Writing tests
+Create a new **\*.test.js** in the *test* folder.   
+Create one test per contract.
+## Running tests
+To run test, firt run the ```ganache-cli``` command in the terminal to run a local development environment for the tests.  
+Open another terminal to and run ```truffle test``` to launch the tests.
+
+# Migrating contracts to the blockchain
+Run the command ```truffle migrate --network ropsten``` to deploy the contracts on the *ropsten* network.
