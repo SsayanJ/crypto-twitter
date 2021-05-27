@@ -18,13 +18,14 @@ contract("TwitterClone", (accounts) => {
     });
 
     describe("CryptoTwitter tests", () => {
+        // This test checks that the createTweet function behaves as expected
         it("Should create a new Tweet from a Text", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner});
             firstTweet = await this.TwitterClone.tweets.call([0]);
             firstTweet.tweetText.should.equal("First Tweet");
         });
 
-
+        // Next 2 tests check that the editTweet function behaves as expective
         it("Should edit a Tweet text when the requester is the owner of the Tweet", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
             try {
@@ -37,21 +38,19 @@ contract("TwitterClone", (accounts) => {
         });
 
 
-
-        // it("Should throw an error as modifier is not the owner of the Tweet", async () => {
-        //     this.TwitterClone.createTweet("First Tweet", {from: owner} );
-        //     try{
-        //     await expectRevert(
-        //         this.TwitterClone.editTweet(0, "EDITED First Tweet", {from: nonOwner}),
-        //         "This action can only be performed by the owner of the tweet"
-        //     );
-        //     } catch (e){
-        //         console.log(e)
-        //     }
-        // });
-
-
-
+        it("Should throw an error as modifier is not the owner of the Tweet", async () => {
+            this.TwitterClone.createTweet("First Tweet", {from: owner} );
+            try{
+            await expectRevert(
+                this.TwitterClone.editTweet(0, "EDITED First Tweet", {from: nonOwner}),
+                "This action can only be performed by the owner of the tweet"
+            );
+            } catch (e){
+                console.log(e)
+            }
+        });
+   
+        // Next test checks that calling 5 times the createTweet function indeed creates 5 Tweets in the tweets list
         it("Check that tweet list is of the correct length", async () => {
             this.TwitterClone.createTweet("Tweet1");
             this.TwitterClone.createTweet("Tweet2");
@@ -62,8 +61,7 @@ contract("TwitterClone", (accounts) => {
             tweetL.toNumber().should.equal(5);
         });
 
-        // TODO test for deleting. This should be pretty straightforward if the Edit one is fixed.
-
+        // Next 2 tests check that the editTweet function behaves as expective
         it("Should set a Tweet delete attribute to true when the requester is the owner of the Tweet", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
             try {
@@ -74,8 +72,6 @@ contract("TwitterClone", (accounts) => {
                 console.log(`${owner} is not the owner`);                
             }
         });   
-
-
 
 
         it("Should throw an error as deleter is not the owner of the Tweet", async () => {
@@ -90,16 +86,20 @@ contract("TwitterClone", (accounts) => {
             }
         });
 
-        // it('emits a Transfer event on successful transfers', async function () {
-        //     this.TwitterClone.createTweet("First Tweet", {from: owner} );
-        
-        //     // Event assertions can verify that the arguments are the expected ones
-        //     expectEvent(Result, {
-        //         '0': 'First Tweet',
-        //         '1': false,
-        //         tweetText: 'First Tweet',
-        //         deleted: false
-        //       });
-        // });
+        // Next test checks the getTweetsByOwner function behaviour.
+        it('confirms getTweetsByOwner returns the proper list', async () => {
+            this.TwitterClone.createTweet("Owner Tweet1", {from: owner} );
+            this.TwitterClone.createTweet("Owner Tweet2", {from: owner} );
+            this.TwitterClone.createTweet("Other tweet", {from: nonOwner} );
+            this.TwitterClone.createTweet("Other tweet", {from: nonOwner} );
+            this.TwitterClone.createTweet("Owner Tweet3", {from: owner} );
+            this.TwitterClone.createTweet("Other tweet", {from: nonOwner} );
+            this.TwitterClone.createTweet("Owner Tweet4", {from: owner} );
+            
+            ownerTweets = await this.TwitterClone.getTweetsByOwner(owner)
+            ownerTweets.length.should.equal(4);
+            lastTweet = await this.TwitterClone.tweets.call(ownerTweets[3]);
+            lastTweet.tweetText.should.equal("Owner Tweet4");
+        });
     });
 });

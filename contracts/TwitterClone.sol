@@ -15,6 +15,10 @@ contract TwitterClone is Ownable {
     mapping(uint256 => address) public tweetToOwner;
     mapping(address => uint256) ownerTweetCount;
 
+    /**
+    * @dev A modifier function to check that only the owner of the tweet can call the function and returns an error otherwise 
+    * @param _tweetId The ID of the tweet to be modified by the function
+     */
     modifier ownerOf(uint256 _tweetId){
         require(tweetToOwner[_tweetId] == msg.sender,
         "This action can only be performed by the owner of the tweet"
@@ -51,10 +55,17 @@ contract TwitterClone is Ownable {
         tweets[_tweetId].deleted = true;
     }
 
+    /**
+    * @dev A getter function to access the length of the tweets List.
+     */
     function getTweetsLength() public view returns(uint count) {
         return tweets.length;
     }
 
+    /**
+    * @dev A function that returns the list of tweets for a specific owner.
+    * @param _owner the address of the owner for which the function returns the list of their tweets.
+     */
     function getTweetsByOwner(address _owner) external view returns(uint[] memory) {
         uint256[] memory result = new uint256[](ownerTweetCount[_owner]);
         uint256 counter = 0;
