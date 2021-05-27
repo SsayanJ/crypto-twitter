@@ -63,6 +63,7 @@ module.exports = {
 				),
 			network_id: "3",
 			gas: 8000000,
+      // networkCheckTimeout: 1000000000,
 		},
 		mainnet: {
 			provider: () =>

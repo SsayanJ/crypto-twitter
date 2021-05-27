@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "truffle test",
-    "migrate": "truffle migrate --network ropsten"
+    "migrate": "truffle migrate --network ropsten",
+    "docker:migrate": "docker-compose -p cz-migrate -f docker-compose.migrate.yaml up",
+		"docker:test": "docker-compose -p cz-tests -f docker-compose.tests.yaml up",
+		"docs": "npx solidity-docgen --solc-module solc-0.7"
   },
   "repository": {
     "type": "git",

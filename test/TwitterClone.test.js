@@ -38,17 +38,17 @@ contract("TwitterClone", (accounts) => {
 
 
 
-        it("Should throw an error as modifier is not the owner of the Tweet", async () => {
-            this.TwitterClone.createTweet("First Tweet", {from: owner} );
-            try{
-            await expectRevert(
-                this.TwitterClone.editTweet(0, "EDITED First Tweet", {from: nonOwner}),
-                "This action can only be performed by the owner of the tweet"
-            );
-            } catch (e){
-                console.log(e)
-            }
-        });
+        // it("Should throw an error as modifier is not the owner of the Tweet", async () => {
+        //     this.TwitterClone.createTweet("First Tweet", {from: owner} );
+        //     try{
+        //     await expectRevert(
+        //         this.TwitterClone.editTweet(0, "EDITED First Tweet", {from: nonOwner}),
+        //         "This action can only be performed by the owner of the tweet"
+        //     );
+        //     } catch (e){
+        //         console.log(e)
+        //     }
+        // });
 
 
 

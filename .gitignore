@@ -24,10 +24,13 @@ hs_err_pid*
 
 # My ignore
 node_modules
+envcryp
 *.env
 *.vscode
 
 # local env files
 .env
+
 .env.local
 .env.*.local
+# node_modules
