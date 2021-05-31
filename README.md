@@ -24,10 +24,12 @@ Test has been carried out against ganache-cli and all the functionalities passed
 Project has been creates in Infura website and respective API key is used to deploy the contract into blockchain.
 Contract has been migrated to Ropsten network
 ### Truffle migrate command
-![coverage](./images/ropstenmigrate.png)
+```truffle migrate --network ropsten```  
+<br>
+![migrate](./images/ropstenmigrate.png)
 
 Docker test and deployments were carried out also added the commands to package.json file 
 ### Devops commands
-npm run docker:test
-npm run docker:migrate
+```npm run docker:test```  
+```npm run docker:migrate```
 
