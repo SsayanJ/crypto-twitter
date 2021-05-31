@@ -9,7 +9,7 @@
     "migrate": "truffle migrate --network ropsten",
     "docker:migrate": "docker-compose -p cz-migrate -f docker-compose.migrate.yaml up",
 		"docker:test": "docker-compose -p cz-tests -f docker-compose.test.yaml up",
-		"docs": "npx solidity-docgen --solc-module solc-0.7"
+		"docs": "npx solidity-docgen --solc-module solc"
   },
   "repository": {
     "type": "git",

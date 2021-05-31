@@ -7,4 +7,5 @@ RUN npm install && npm install -g truffle@5.1.59
 
 COPY . .
 
-CMD ["truffle", "test"]
+# CMD ["truffle", "test"]
+CMD ["truffle", "run", "coverage"]

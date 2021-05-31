@@ -37,9 +37,7 @@ contract("TwitterClone", (accounts) => {
         it("Should warn that the Tweet was deleted when user tries to read it", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
             this.TwitterClone.deleteTweet(0, {from: owner});
-            let tweet_info;
             await expectRevert(
-                // tweet_info = 
                 this.TwitterClone.readTweet(0),
                 "This tweet was deleted"
             );

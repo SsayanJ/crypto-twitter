@@ -30,6 +30,10 @@ Contract has been migrated to Ropsten network
 
 Docker test and deployments were carried out also added the commands to package.json file 
 ### Devops commands
-```npm run docker:test```  
-```npm run docker:migrate```
+Deploy test Docker container ```npm run docker:test```   
+<br>  
+![migrate](./images/Docker_test_coverage.png)
+Deploy migrate Docker container ```npm run docker:migrate```  
+<br>
+![migrate](./images/Docker_migrate.png)
 
