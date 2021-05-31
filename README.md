@@ -19,3 +19,15 @@ To be noted that the tests on the Tweet list tests have a strange behaviour as s
 ![truffle-test](./images/truffle_test.png)  
 ### Truffle run coverage command
 ![coverage](./images/test_coverage.png)
+
+Test has been carried out against ganache-cli and all the functionalities passed without errors
+Project has been creates in Infura website and respective API key is used to deploy the contract into blockchain.
+Contract has been migrated to Ropsten network
+### Truffle migrate command
+![coverage](./images/ropstenmigrate.png)
+
+Docker test and deployments were carried out also added the commands to package.json file 
+### Devops commands
+npm run docker:test
+npm run docker:migrate
+
