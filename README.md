@@ -35,5 +35,5 @@ Deploy test Docker container ```npm run docker:test```
 ![migrate](./images/Docker_test_coverage.png)
 Deploy migrate Docker container ```npm run docker:migrate```  
 <br>
-![migrate](./images/Docker_migrate.png)
+![migrate](./images/Docker_migrate.PNG)
 
