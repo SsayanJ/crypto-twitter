@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "truffle test",
+    "coverage": "truffle run coverage",
     "migrate": "truffle migrate --network ropsten",
     "docker:migrate": "docker-compose -p cz-migrate -f docker-compose.migrate.yaml up",
 		"docker:test": "docker-compose -p cz-tests -f docker-compose.test.yaml up",

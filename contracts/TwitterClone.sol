@@ -26,6 +26,7 @@ contract TwitterClone is Ownable {
         _;
     }
 
+
     /**
     * @dev A function that creates a new Tweet given the text
     * @param _tweetText The text of the tweet to be created
@@ -38,6 +39,18 @@ contract TwitterClone is Ownable {
         emit NewTweet(tweetId, _tweetText, msg.sender);
     }
 
+
+    /**
+    * @dev A function that returns a Tweet information (owner and text). If the tweet was deleted it returns a warning.
+    * @param _tweetId The ID of the tweet to be read
+     */
+    function readTweet(uint256 _tweetId) public view returns(address owner, string memory tweetText) {
+        Tweet memory t = tweets[_tweetId];
+        require(t.deleted == false, "This tweet was deleted" );
+        return (tweetToOwner[_tweetId], t.tweetText);
+    }
+
+
     /**
     * @dev A function that edits a Tweet text with a new text. Only Tweet owner can edit a tweet.
     * @param _tweetId The ID of the tweet to be edited
@@ -47,6 +60,7 @@ contract TwitterClone is Ownable {
         tweets[_tweetId].tweetText = _newText;
     }
 
+
     /**
     * @dev A function that mark a Tweet as deleted. Only Tweet owner can edit a tweet.
     * @param _tweetId The ID of the tweet to be deleted
@@ -55,12 +69,14 @@ contract TwitterClone is Ownable {
         tweets[_tweetId].deleted = true;
     }
 
+
     /**
     * @dev A getter function to access the length of the tweets List.
      */
     function getTweetsLength() public view returns(uint count) {
         return tweets.length;
     }
+
 
     /**
     * @dev A function that returns the list of tweets for a specific owner.

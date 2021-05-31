@@ -25,7 +25,29 @@ contract("TwitterClone", (accounts) => {
             firstTweet.tweetText.should.equal("First Tweet");
         });
 
-        // Next 2 tests check that the editTweet function behaves as expective
+        // Next 2 tests check that the readTweet function behaves as expected
+        it("Should return owner and text of a tweet that was not deleted", async () => {
+            this.TwitterClone.createTweet("First Tweet", {from: owner} );            
+            let tweet_info = await this.TwitterClone.readTweet(0);
+            tweet_info[0].should.equal(owner);      
+            tweet_info[1].should.equal("First Tweet");      
+        });
+
+
+        it("Should warn that the Tweet was deleted when user tries to read it", async () => {
+            this.TwitterClone.createTweet("First Tweet", {from: owner} );
+            this.TwitterClone.deleteTweet(0, {from: owner});
+            let tweet_info;
+            await expectRevert(
+                // tweet_info = 
+                this.TwitterClone.readTweet(0),
+                "This tweet was deleted"
+            );
+
+            
+        });
+
+        // Next 2 tests check that the editTweet function behaves as expected
         it("Should edit a Tweet text when the requester is the owner of the Tweet", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
             try {
@@ -40,14 +62,11 @@ contract("TwitterClone", (accounts) => {
 
         it("Should throw an error as modifier is not the owner of the Tweet", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
-            try{
             await expectRevert(
                 this.TwitterClone.editTweet(0, "EDITED First Tweet", {from: nonOwner}),
                 "This action can only be performed by the owner of the tweet"
             );
-            } catch (e){
-                console.log(e)
-            }
+
         });
    
         // Next test checks that calling 5 times the createTweet function indeed creates 5 Tweets in the tweets list
@@ -61,7 +80,7 @@ contract("TwitterClone", (accounts) => {
             tweetL.toNumber().should.equal(5);
         });
 
-        // Next 2 tests check that the editTweet function behaves as expective
+        // Next 2 tests check that the editTweet function behaves as expected
         it("Should set a Tweet delete attribute to true when the requester is the owner of the Tweet", async () => {
             this.TwitterClone.createTweet("First Tweet", {from: owner} );
             try {
